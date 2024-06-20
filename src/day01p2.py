@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 
-
-
 def find_first_and_last_numbers(line):
     numbers_as_strings = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
     index_first_num = None
@@ -36,13 +34,18 @@ def find_first_and_last_numbers(line):
 def convert_to_int(string):
     return numbers_as_strings.index(string)
 
+def main(file):
+    try:
+        with open(file) as input_file:
+            total = 0
+            for line in input_file:
+                val_first_num, val_last_num = find_first_and_last_numbers(line.strip("\n"))
+                string_representation_of_sum = f"{val_first_num}{val_last_num}"
+                total = total + int(string_representation_of_sum)
+            print(total)
+            return total
+    except FileNotFoundError:
+        print("Please cd into src directory to run the script")
 
-with open("Input01.txt") as input_file:
-    total = 0
-    for line in input_file:
-        val_first_num, val_last_num = find_first_and_last_numbers(line.strip("\n"))
-        string_representation_of_sum = f"{val_first_num}{val_last_num}"
-        total = total + int(string_representation_of_sum)
-        print(f"Line: {line.strip("\n")}, First: {val_first_num}, Last: {val_last_num}, Sum: {string_representation_of_sum}, New total: {total}")
-        
-    print(total)
+if __name__ == '__main__':
+    main("day01_input.txt")
